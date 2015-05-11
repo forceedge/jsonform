@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sharepoint UV Generator</title>
+    <link rel="stylesheet" style="text/css" href="deps/opt/bootstrap.css" />
+  </head>
+  <body>
+    <h1>Sharepoint UV Generator</h1>
+    <form><input type="submit"></form>
+    <div id="res" class="alert"></div>
+    <script type="text/javascript" src="deps/jquery.min.js"></script>
+    <script type="text/javascript" src="deps/underscore.js"></script>
+    <script type="text/javascript" src="deps/opt/jsv.js"></script>
+    <script type="text/javascript" src="lib/jsonform.js"></script>
+    <script type="text/javascript">
+      $('form').jsonForm({
+        schema: {          
+          "_at": {
+            type: "object",
+            title: "Advocate_Things",
+            properties: {
+              key: {
+                type: 'string',
+                title: 'Client Key',
+                required: true
+              },
+              user_id: {
+                type: 'string',
+                title: 'Client User ID',
+                default: '{ user.id }'            
+              },
+              email: {
+                type: "string",
+                title: 'Email Address',
+                default: '{ user.email }'
+              },
+              shareChannel: {
+                type: "string",
+                title: "Share Channel",
+                default: '{ shareChannel }'
+              },
+              username: {
+                type: 'string',
+                title: 'Client\'s User Username',
+                 default: '{ user.username }'
+              },
+              sharepoint: {
+                type: 'string',
+                title: 'Sharepoint Name',
+                required: true
+              },
+              disable_address_bar_tracking: {
+                type: 'boolean',
+              }
+            },
+          },
+          "meta": {
+            type: "object",
+            title: "meta",
+            properties: {
+              "property": {
+                type: "string",
+                title: "Property {{idx}}"
+              },
+              "value": {
+                type: "string",
+                title: "Value {{idx}}"
+              },
+            }
+          }
+        },
+        "form": [
+          {
+            "key": "_at"
+          },
+          {
+            "type": "tabarray",
+            "items": [{
+              // "key": "meta[]",
+              "type": "section",
+              "legend": "meta {{idx}}",
+              "items": [
+                "meta.property",
+                "meta.value",
+              ],
+            }],
+          }
+        ],
+        onSubmit: function (errors, values) {
+          if (errors) {
+            $('#res').html('<p>I beg your pardon?</p>');
+          }
+          else {
+            if (typeof values != 'string') {
+                 json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
+            }
+
+            $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
