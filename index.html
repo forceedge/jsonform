@@ -56,17 +56,20 @@
             },
           },
           "meta": {
-            type: "object",
-            title: "meta",
-            properties: {
-              "property": {
-                type: "string",
-                title: "Property {{idx}}"
-              },
-              "value": {
-                type: "string",
-                title: "Value {{idx}}"
-              },
+            type: "array",
+            items: {
+              type: "object",
+              title: "meta",
+              properties: {
+                "property": {
+                  type: "string",
+                  title: "Property {{idx}}"
+                },
+                "value": {
+                  type: "string",
+                  title: "Value {{idx}}"
+                }
+              }
             }
           }
         },
@@ -77,17 +80,30 @@
           {
             "type": "tabarray",
             "items": [{
-              // "key": "meta[]",
               "type": "section",
               "legend": "meta {{idx}}",
               "items": [
-                "meta.property",
-                "meta.value",
+                {
+                  "key": "meta[].property",
+                  "title": "Property"
+                },
+                {
+                  "key": "meta[].value",
+                  "title": "Value"
+                }
               ],
             }],
           }
         ],
         onSubmit: function (errors, values) {
+          var reformattedMeta = '';
+          
+          values.meta.forEach(function(obj) {
+            reformattedMeta += obj.property + ': ' + JSON.stringify(obj.value) + ',';
+          });
+
+          values.meta = eval('({' + reformattedMeta.slice(0, -1) + '})');
+
           if (errors) {
             $('#res').html('<p>I beg your pardon?</p>');
           }
