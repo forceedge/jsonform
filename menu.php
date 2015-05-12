@@ -1,6 +1,6 @@
 <style>
 #menu {
-	height: 60px;
+	height: 50px;
 	font-size: 18px;
 	background: #282828;
 	width: 100%;
@@ -10,13 +10,13 @@
 
 #menu #links {
 	float: right;
+	padding: 15px;
 }
 
 #menu #links a {
 	float: right;
 	text-decoration: none;
 	color: white;
-	font-weight: bold;
 	margin-right: 15px;
 }
 
