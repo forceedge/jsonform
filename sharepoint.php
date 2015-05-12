@@ -51,6 +51,7 @@
                   type: 'string',
                   title: 'Point Type',
                   enum: [
+                    'Please select',
                     'sharepoint',
                     'touchpoint'
                   ]
@@ -145,28 +146,6 @@
             //   "value": "Generate"
             // }
           // ],
-          onSubmit: function (errors, values) {
-            if(typeof values.meta !== 'undefined') {
-              values.meta = arrayToProperObject(values.meta);
-
-              for(var propertyName in values.meta) {
-                if(typeof values.meta[propertyName] !== 'undefined') {
-                  values.meta[propertyName] = arrayToProperObject(values.meta[propertyName]);
-                }
-              };
-            }
-
-            if (errors) {
-              $('#res').html('<p>I beg your pardon?</p>');
-            }
-            else {
-              if (typeof values != 'string') {
-                   json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
-              }
-
-              $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
-            }
-          }
         });
 
         function arrayToProperObject(arr) {
@@ -272,7 +251,31 @@
                   "value": "Generate"
                 }
               ],
+              onSubmit: function (errors, values) {
+                if(typeof values.meta !== 'undefined') {
+                  values.meta = arrayToProperObject(values.meta);
+
+                  for(var propertyName in values.meta) {
+                    if(typeof values.meta[propertyName] !== 'undefined') {
+                      values.meta[propertyName] = arrayToProperObject(values.meta[propertyName]);
+                    }
+                  };
+                }
+
+                if (errors) {
+                  $('#res').html('<p>I beg your pardon?</p>');
+                }
+                else {
+                  if (typeof values != 'string') {
+                       json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
+                  }
+
+                  $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
+                }
+              }
             });
+          } else if($(this).val() === 'touchpoint') {
+
           }
         });
       </script>
