@@ -166,7 +166,7 @@
         jQuery("select[name='_at.pointType']").on('change', function() {
           if($(this).val() == 'sharepoint') {
             // generate the rest of the form here
-            $('form').jsonForm({
+            $('form fieldset').jsonForm({
               schema: {          
                 "_at": {
                   type: "object",
