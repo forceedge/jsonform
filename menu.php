@@ -27,14 +27,17 @@
 
 #menu #logo {
 	float: left;
+	margin-left: 15px;
+	padding: 15px;
 }
 </style>
 
 <div id="menu">
 	<div id="logo">
+		Advocate Things JSON Generator
 	</div>
 	<div id="links">
-		Configure: 
+		Configure: &nbsp;&nbsp;&nbsp;
 		<a href="sharepoint.php">Sharepoint</a>
 		<a href="touchpoint.php">Touchpoint</a>
 	</div>
