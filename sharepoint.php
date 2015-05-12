@@ -177,6 +177,10 @@
           jQuery('li.active .draggable.tab').val(jQuery('.controls > input').val());
         });
 
+        jQuery('select[name=_at.pointType]').on('change', function() {
+          alert('value changed to: '+$(this).val());
+        });
+
       </script>
     </div>
   </body>
