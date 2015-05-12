@@ -169,33 +169,8 @@ $('form#sharepoint-generate-json').jsonForm({
       "value": "Generate"
     }
   ],
-  onSubmit: function (errors, values) {
-  jQuery('form#main').submit();
-
-  if(! mainJSON)
-    return false;
-
-  if(typeof values.meta !== 'undefined') {
-      values.meta = arrayToProperObject(values.meta);
-
-      for(var propertyName in values.meta) {
-        if(typeof values.meta[propertyName] !== 'undefined') {
-          values.meta[propertyName] = arrayToProperObject(values.meta[propertyName]);
-        }
-      };
-    }
-
-    if (errors) {
-      $('#res').html('<p>I beg your pardon?</p>');
-    }
-    else {
-      if (typeof values != 'string') {
-        values = $.extend(true, {}, mainJSON, values);
-        json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
-      }
-
-      $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
-    }
+  onSubmit: function(errors, values) {
+    generateOutput(errors, values);
   }
 });
 
@@ -271,7 +246,13 @@ $('form#touchpoint-generate-json').jsonForm({
       "value": "Generate"
     }
   ],
-  onSubmit: function (errors, values) {
+  onSubmit: function(errors, values) {
+    generateOutput(errors, values);
+  }
+});
+
+// Generates the JSON for both of the form submissions
+function generateOutput (errors, values) {
   jQuery('form#main').submit();
 
   if(! mainJSON)
@@ -298,8 +279,7 @@ $('form#touchpoint-generate-json').jsonForm({
 
       $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
     }
-  }
-});
+  };
 
 // Switching between forms
 jQuery("select[name='_at.pointType']").on('change', function() {
