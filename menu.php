@@ -6,6 +6,7 @@
 	width: 100%;
 	float: left;
 	color: white;
+	margin-bottom: 15px;
 }
 
 #menu #links {
