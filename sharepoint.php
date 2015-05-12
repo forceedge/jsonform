@@ -9,7 +9,12 @@
     <?php require 'menu.php'; ?>
     <div class="container">
       <h1>Sharepoint UV Generator</h1>
-      <form></form>
+      <form>
+        <select id="pointType">
+          <option value="sharepoint">Sharepoint</option>
+          <option value="touchpoint">Touchpoint</option>
+        </select>
+      </form>
       <div id="res" class="alert"></div>
       <script type="text/javascript" src="deps/jquery.min.js"></script>
       <script type="text/javascript" src="deps/underscore.js"></script>
