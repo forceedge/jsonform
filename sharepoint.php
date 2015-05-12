@@ -277,9 +277,9 @@
             });
 
             // re-organize the form
-            var content = jQuery('form fieldset > div > fieldset').html();
-            jQuery('form > fieldset').remove();
-            jQuery('form fieldset').prepend(content);
+            var content = jQuery('form').first('fieldset').first('div').first('fieldset').html();
+            jQuery('form').first('fieldset').remove();
+            jQuery('form fieldset').apend(content);
 
           } else if($(this).val() === 'touchpoint') {
 
