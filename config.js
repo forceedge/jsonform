@@ -72,23 +72,6 @@ $('form#main').jsonForm({
     }
 });
 
-// Bit of a hack
-jQuery('.form-actions').remove();
-
-// arrayToProperObject
-function arrayToProperObject(arr) {
-  var reformattedMeta = '';
-
-  arr.forEach(function(obj) {
-    reformattedMeta += obj.property + ': ' + JSON.stringify(obj.value) + ',';
-  });
-
-  return eval('({' + reformattedMeta.slice(0, -1) + '})');
-}
-
-// Hide the genrated forms
-jQuery('form.generated-json').hide();
-
 // Generate hidden forms
 // generate the rest of the form here
 $('form#sharepoint-generate-json').jsonForm({
@@ -254,6 +237,26 @@ $('form#touchpoint-generate-json').jsonForm({
   }
 });
 
+// Bit of a hack
+jQuery('.form-actions').remove();
+
+// arrayToProperObject
+function arrayToProperObject(arr) {
+  var reformattedMeta = '';
+
+  arr.forEach(function(obj) {
+    if(typeof obj.value !== 'undefined' && typeof obj.property !== 'undefined') {
+      reformattedMeta += obj.property.replace(/ /g, '_') + ': ' + JSON.stringify(obj.value) + ',';
+    }
+  });
+
+  // creates a JSON object from string
+  return eval('({' + reformattedMeta.slice(0, -1) + '})');
+}
+
+// Hide the genrated forms
+jQuery('form.generated-json').hide();
+
 // Generates the JSON for both of the form submissions
 function generateOutput (errors, values) {
   jQuery('form#main').submit();
@@ -261,12 +264,15 @@ function generateOutput (errors, values) {
   if(! mainJSON)
     return false;
 
-  if(typeof values.meta !== 'undefined') {
+  if(typeof values.meta !== "undefined") {
     values.meta = arrayToProperObject(values.meta);
 
     for(var propertyName in values.meta) {
-      if(typeof values.meta[propertyName] !== 'undefined') {
-        values.meta[propertyName] = arrayToProperObject(values.meta[propertyName]);
+      if(propertyName == 'undefined') {
+        values.meta = arrayToProperObject(values.meta[propertyName]);
+      }
+      else if(typeof values.meta[propertyName] !== "undefined") {
+        values.meta[propertyName.replace(/ /g, '_')] = arrayToProperObject(values.meta[propertyName]);
       }
     };
   }
