@@ -245,8 +245,13 @@ function arrayToProperObject(arr) {
   var reformattedMeta = '';
 
   arr.forEach(function(obj) {
-    if(typeof obj.value !== 'undefined' && typeof obj.property !== 'undefined') {
-      reformattedMeta += obj.property.replace(/ /g, '_') + ': ' + JSON.stringify(obj.value) + ',';
+    if(typeof obj.property !== 'undefined') {
+      reformattedMeta += obj.property.replace(/ /g, '_') + ': ';
+      if(typeof obj.value !== 'undefined') {
+        reformattedMeta += JSON.stringify(obj.value) + ',';
+      } else {
+        reformattedMeta += '"",';
+      }
     }
   });
 
@@ -264,14 +269,16 @@ function generateOutput (errors, values) {
   if(! mainJSON)
     return false;
 
+  console.log(values);
+
   if(typeof values.meta !== "undefined") {
     values.meta = arrayToProperObject(values.meta);
 
     for(var propertyName in values.meta) {
       if(propertyName == 'undefined') {
-        values.meta = arrayToProperObject(values.meta[propertyName]);
+        values.meta = arrayToProperObject(values.meta);
       }
-      else if(typeof values.meta[propertyName] !== "undefined") {
+      else {
         values.meta[propertyName.replace(/ /g, '_')] = arrayToProperObject(values.meta[propertyName]);
       }
     };
