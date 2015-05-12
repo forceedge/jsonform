@@ -7,11 +7,6 @@ $('form#main').jsonForm({
       type: "object",
       title: "Advocate_Things",
       properties: {
-        key: {
-          type: 'string',
-          title: 'Client API Key',
-          required: true
-        },
         userId: {
           type: 'string',
           title: 'Client User ID',
@@ -31,6 +26,16 @@ $('form#main').jsonForm({
           type: 'string',
           title: 'Client\'s User Name',
            default: '{ user.name }'
+        },
+        facebookId: {
+          type: 'string',
+          title: 'Facebook ID',
+          default: '{ user.facebookId }'
+        },
+        twitterId: {
+          type: 'string',
+          title: 'Twitter ID',
+          default: '{ user.twitterId }'
         },
         pointType: {
           type: 'string',
@@ -90,27 +95,17 @@ $('form#sharepoint-generate-json').jsonForm({
       type: "object",
       title: "Sharepoint Data",
       properties: {
-        shareChannel: {
-          type: "string",
-          title: "Share Channel",
-          default: '{ shareChannel }'
-        },
         sharepointName: {
           type: 'string',
           title: 'Sharepoint Name',
           required: true
         },
-        facebookId: {
-          type: 'string',
-          title: 'Facebook ID',
-          default: '{ user.facebookId }'
-        },
-        twitterId: {
-          type: 'string',
-          title: 'Twitter ID',
-          default: '{ user.twitterId }'
-        },
-      },
+        shareChannel: {
+          type: "string",
+          title: "Share Channel",
+          default: '{ shareChannel }'
+        }
+      }
     },
     "meta": {
       type: "array",
@@ -151,11 +146,12 @@ $('form#sharepoint-generate-json').jsonForm({
       "type": "tabarray",
       "items": [{
         "type": "section",
-        "legend": "meta {{idx}}",
+        "legend": "{{ value }}",
         "items": [
           {
             "key": "meta[].property",
-            "title": "Property"
+            "title": "Property",
+            "valueInLegend": true
           },
           {
             "key": "meta[].value",
@@ -228,11 +224,12 @@ $('form#touchpoint-generate-json').jsonForm({
       "type": "tabarray",
       "items": [{
         "type": "section",
-        "legend": "meta {{idx}}",
+        "legend": "{{ value }}",
         "items": [
           {
             "key": "meta[].property",
-            "title": "Property"
+            "title": "Property",
+            "valueInLegend": true
           },
           {
             "key": "meta[].value",
@@ -273,10 +270,16 @@ function generateOutput (errors, values) {
     }
     else {
       if (typeof values != 'string') {
+        // merge the two json objects, mainJSON contains the generic info
         values = $.extend(true, {}, mainJSON, values);
+        // Get rid of the extra field
+        delete values._at['pointType'];
+
+        // Stringify the json object for output
         json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
       }
 
+      // Display result in the res element
       $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
     }
   };
