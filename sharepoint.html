@@ -210,8 +210,13 @@
                 }
                 else {
                   if (typeof values != 'string') {
+                    console.log('attempting to concat jsons');
                     values = mainJSON.concat(values);
+                    console.log('json concatinated');
+                    console.log(values);
                     json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
+                    console.log('json stringified');
+                    console.log(json);
                   }
 
                   $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
