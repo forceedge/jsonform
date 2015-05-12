@@ -114,8 +114,7 @@ $('form#sharepoint-generate-json').jsonForm({
         title: "meta",
         properties: {
           "property": {
-            type: "string",
-            title: "Property {{idx}}"
+            type: "string"
           },
           "value": {
             type: "array",
@@ -138,6 +137,9 @@ $('form#sharepoint-generate-json').jsonForm({
       }
     }
   },
+  "params": {
+    'fieldHtmlClass': 'this-is-the-field-html-class'
+  },
   "form": [
     {
       "key": "_at"
@@ -155,7 +157,8 @@ $('form#sharepoint-generate-json').jsonForm({
           },
           {
             "key": "meta[].value",
-            "title": "Value"
+            "title": "Value",
+            "htmlClass": "wrapup"
           }
         ],
       }],
