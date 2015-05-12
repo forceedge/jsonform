@@ -10,8 +10,6 @@
     <div class="container">
       <h1>Sharepoint UV Generator</h1>
       <form>
-        <div id="generated-content">
-        </div>
       </form>
       <div id="res" class="alert"></div>
       <script type="text/javascript" src="deps/jquery.min.js"></script>
@@ -171,7 +169,7 @@
         jQuery("select[name='_at.pointType']").on('change', function() {
           if($(this).val() == 'sharepoint') {
             // generate the rest of the form here
-            $('form generated-content').jsonForm({
+            $('form').jsonForm({
               schema: {          
                 "_at": {
                   type: "object",
