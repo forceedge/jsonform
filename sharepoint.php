@@ -149,7 +149,7 @@
           // ],
         });
 
-        jQuery('#form-actions').remove();
+        jQuery('.form-actions').remove();
 
         function arrayToProperObject(arr) {
           var reformattedMeta = '';
