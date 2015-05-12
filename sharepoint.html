@@ -6,10 +6,11 @@
     <link rel="stylesheet" style="text/css" href="deps/opt/bootstrap.css" />
   </head>
   <body>
-    <?php require 'menu.php'; ?>
     <div class="container">
       <h1>Sharepoint UV Generator</h1>
-      <form>
+      <form id="main">
+      </form>
+      <form id="generate-json">
       </form>
       <div id="res" class="alert"></div>
       <script type="text/javascript" src="deps/jquery.min.js"></script>
@@ -17,7 +18,8 @@
       <script type="text/javascript" src="deps/opt/jsv.js"></script>
       <script type="text/javascript" src="lib/jsonform.js"></script>
       <script type="text/javascript">
-        $('form').jsonForm({
+        var mainJSON = {};
+        $('form#main').jsonForm({
           schema: {          
             "_at": {
               type: "object",
@@ -147,6 +149,29 @@
             //   "value": "Generate"
             // }
           // ],
+          onSubmit: function (errors, values) {
+            if(typeof values.meta !== 'undefined') {
+                values.meta = arrayToProperObject(values.meta);
+
+                for(var propertyName in values.meta) {
+                  if(typeof values.meta[propertyName] !== 'undefined') {
+                    values.meta[propertyName] = arrayToProperObject(values.meta[propertyName]);
+                  }
+                };
+              }
+
+              if (errors) {
+                $('#res').html('<p>I beg your pardon?</p>');
+              }
+              else {
+                if (typeof values != 'string') {
+                  mainJSON = values;
+                     // json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
+                }
+
+                // $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
+              }
+            }
         });
 
         jQuery('.form-actions').remove();
@@ -169,7 +194,7 @@
         jQuery("select[name='_at.pointType']").on('change', function() {
           if($(this).val() == 'sharepoint') {
             // generate the rest of the form here
-            $('form').jsonForm({
+            $('form#generate-json').jsonForm({
               schema: {          
                 "_at": {
                   type: "object",
@@ -255,7 +280,12 @@
                 }
               ],
               onSubmit: function (errors, values) {
-                if(typeof values.meta !== 'undefined') {
+              jQuery('form#main').submit();
+              
+              if(! mainJSON)
+                return false;
+
+              if(typeof values.meta !== 'undefined') {
                   values.meta = arrayToProperObject(values.meta);
 
                   for(var propertyName in values.meta) {
@@ -270,18 +300,14 @@
                 }
                 else {
                   if (typeof values != 'string') {
-                       json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
+                    values = mainJSON.concat(values);
+                    json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
                   }
 
                   $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
                 }
               }
             });
-
-            // re-organize the form
-            var content = jQuery('form div').first().html();
-            jQuery('form div').first().remove();
-            jQuery('form div').first().append(content);
 
           } else if($(this).val() === 'touchpoint') {
 
