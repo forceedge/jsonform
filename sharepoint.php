@@ -277,6 +277,10 @@
           } else if($(this).val() === 'touchpoint') {
 
           }
+
+          var content = jQuery('form fieldset > div > fieldset').html();
+          jQuery('form > fieldset').remove();
+          jQuery('form fieldset').prepend(content);
         });
       </script>
     </div>
