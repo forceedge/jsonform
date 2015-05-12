@@ -279,9 +279,9 @@
             });
 
             // re-organize the form
-            var content = jQuery('form div fieldset div').first().html();
-            jQuery('form div fieldset div').first().remove();
-            jQuery('form fieldset').append(content);
+            var content = jQuery('form div').first().html();
+            jQuery('form div').first().remove();
+            jQuery('form div').append(content);
 
           } else if($(this).val() === 'touchpoint') {
 
