@@ -51,8 +51,8 @@
                   type: 'string',
                   title: 'Point Type',
                   enum: [
-                    'Sharepoint',
-                    'Touchpoint'
+                    'sharepoint',
+                    'touchpoint'
                   ]
                 },
                 shareChannel: {
@@ -113,6 +113,13 @@
             }
           },
           "form": [
+            {
+              "key": "_at.pointType",
+              "titleMap": {
+                "touchpoint": "Touchpoint",
+                "sharepoint": "Sharepoint"
+              }
+            },
             {
               "key": "_at"
             },
