@@ -9,7 +9,8 @@
     <?php require 'menu.php'; ?>
     <div class="container">
       <h1>Sharepoint UV Generator</h1>
-      <form></form>
+      <form>
+      </form>
       <div id="res" class="alert"></div>
       <script type="text/javascript" src="deps/jquery.min.js"></script>
       <script type="text/javascript" src="deps/underscore.js"></script>
@@ -274,13 +275,15 @@
                 }
               }
             });
+
+            // re-organize the form
+            var content = jQuery('form fieldset > div > fieldset').html();
+            jQuery('form > fieldset').remove();
+            jQuery('form fieldset').prepend(content);
+
           } else if($(this).val() === 'touchpoint') {
 
           }
-
-          var content = jQuery('form fieldset > div > fieldset').html();
-          jQuery('form > fieldset').remove();
-          jQuery('form fieldset').prepend(content);
         });
       </script>
     </div>
