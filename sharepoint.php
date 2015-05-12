@@ -281,7 +281,7 @@
             // re-organize the form
             var content = jQuery('form div').first().html();
             jQuery('form div').first().remove();
-            jQuery('form div').append(content);
+            jQuery('form div').first().append(content);
 
           } else if($(this).val() === 'touchpoint') {
 
