@@ -55,96 +55,96 @@
                     'touchpoint'
                   ]
                 },
-                shareChannel: {
-                  type: "string",
-                  title: "Share Channel",
-                  default: '{ shareChannel }'
-                },
-                sharepointName: {
-                  type: 'string',
-                  title: 'Sharepoint Name',
-                  required: true
-                },
-                facebookId: {
-                  type: 'string',
-                  title: 'Facebook ID',
-                  default: '{ user.facebookId }'
-                },
-                twitterId: {
-                  type: 'string',
-                  title: 'Twitter ID',
-                  default: '{ user.twitterId }'
-                },
+                // shareChannel: {
+                //   type: "string",
+                //   title: "Share Channel",
+                //   default: '{ shareChannel }'
+                // },
+                // sharepointName: {
+                //   type: 'string',
+                //   title: 'Sharepoint Name',
+                //   required: true
+                // },
+                // facebookId: {
+                //   type: 'string',
+                //   title: 'Facebook ID',
+                //   default: '{ user.facebookId }'
+                // },
+                // twitterId: {
+                //   type: 'string',
+                //   title: 'Twitter ID',
+                //   default: '{ user.twitterId }'
+                // },
                 // disable_address_bar_tracking: {
                 //   type: 'boolean',
                 //   title: "Disable address bar tracking"
                 // }
               },
             },
-            "meta": {
-              type: "array",
-              items: {
-                type: "object",
-                title: "meta",
-                properties: {
-                  "property": {
-                    type: "string",
-                    title: "Property {{idx}}"
-                  },
-                  "value": {
-                    type: "array",
-                    title: "Value {{idx}}",
-                    items: {
-                      type: "object",
-                      properties: {
-                        "property": {
-                          type: "string",
-                          title: "Property {{idx}}"
-                        },
-                        "value": {
-                          type: "string",
-                          title: "Value {{idx}}"
-                        },
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            // "meta": {
+            //   type: "array",
+            //   items: {
+            //     type: "object",
+            //     title: "meta",
+            //     properties: {
+            //       "property": {
+            //         type: "string",
+            //         title: "Property {{idx}}"
+            //       },
+            //       "value": {
+            //         type: "array",
+            //         title: "Value {{idx}}",
+            //         items: {
+            //           type: "object",
+            //           properties: {
+            //             "property": {
+            //               type: "string",
+            //               title: "Property {{idx}}"
+            //             },
+            //             "value": {
+            //               type: "string",
+            //               title: "Value {{idx}}"
+            //             },
+            //           }
+            //         }
+            //       }
+            //     }
+            //   }
+            // }
           },
-          "form": [
-            {
-              "key": "_at.pointType",
-              "titleMap": {
-                "touchpoint": "Touchpoint",
-                "sharepoint": "Sharepoint"
-              }
-            },
-            {
-              "key": "_at"
-            },
-            {
-              "type": "tabarray",
-              "items": [{
-                "type": "section",
-                "legend": "meta {{idx}}",
-                "items": [
-                  {
-                    "key": "meta[].property",
-                    "title": "Property"
-                  },
-                  {
-                    "key": "meta[].value",
-                    "title": "Value"
-                  }
-                ],
-              }],
-            },
-            {
-              "type": "submit",
-              "value": "Generate"
-            }
-          ],
+          // "form": [
+            // {
+            //   "key": "_at.pointType",
+            //   "titleMap": {
+            //     "touchpoint": "Touchpoint",
+            //     "sharepoint": "Sharepoint"
+            //   }
+            // },
+            // {
+            //   "key": "_at"
+            // },
+            // {
+            //   "type": "tabarray",
+            //   "items": [{
+            //     "type": "section",
+            //     "legend": "meta {{idx}}",
+            //     "items": [
+            //       {
+            //         "key": "meta[].property",
+            //         "title": "Property"
+            //       },
+            //       {
+            //         "key": "meta[].value",
+            //         "title": "Value"
+            //       }
+            //     ],
+            //   }],
+            // },
+            // {
+            //   "type": "submit",
+            //   "value": "Generate"
+            // }
+          // ],
           onSubmit: function (errors, values) {
             if(typeof values.meta !== 'undefined') {
               values.meta = arrayToProperObject(values.meta);
@@ -185,9 +185,95 @@
         });
 
         jQuery("select[name='_at.pointType']").on('change', function() {
-          alert('value changed to: '+$(this).val());
-        });
-
+          if($(this).val() == 'sharepoint') {
+            // generate the rest of the form here
+            $('form').jsonForm({
+              schema: {          
+                "_at": {
+                  type: "object",
+                  title: "Advocate_Things",
+                  properties: {
+                    shareChannel: {
+                      type: "string",
+                      title: "Share Channel",
+                      default: '{ shareChannel }'
+                    },
+                    sharepointName: {
+                      type: 'string',
+                      title: 'Sharepoint Name',
+                      required: true
+                    },
+                    facebookId: {
+                      type: 'string',
+                      title: 'Facebook ID',
+                      default: '{ user.facebookId }'
+                    },
+                    twitterId: {
+                      type: 'string',
+                      title: 'Twitter ID',
+                      default: '{ user.twitterId }'
+                    },
+                  },
+                },
+                "meta": {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    title: "meta",
+                    properties: {
+                      "property": {
+                        type: "string",
+                        title: "Property {{idx}}"
+                      },
+                      "value": {
+                        type: "array",
+                        title: "Value {{idx}}",
+                        items: {
+                          type: "object",
+                          properties: {
+                            "property": {
+                              type: "string",
+                              title: "Property {{idx}}"
+                            },
+                            "value": {
+                              type: "string",
+                              title: "Value {{idx}}"
+                            },
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "form": [
+                {
+                  "key": "_at"
+                },
+                {
+                  "type": "tabarray",
+                  "items": [{
+                    "type": "section",
+                    "legend": "meta {{idx}}",
+                    "items": [
+                      {
+                        "key": "meta[].property",
+                        "title": "Property"
+                      },
+                      {
+                        "key": "meta[].value",
+                        "title": "Value"
+                      }
+                    ],
+                  }],
+                },
+                {
+                  "type": "submit",
+                  "value": "Generate"
+                }
+              ],
+            });
+          }
       </script>
     </div>
   </body>
