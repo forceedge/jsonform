@@ -52,6 +52,14 @@
                   title: 'Client\'s User Name',
                    default: '{ user.name }'
                 },
+                pointType: {
+                  type: 'string',
+                  title: 'Point Type',
+                  enum: [
+                    'Sharepoint',
+                    'Touchpoint'
+                  ]
+                }
                 shareChannel: {
                   type: "string",
                   title: "Share Channel",
