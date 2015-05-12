@@ -35,7 +35,7 @@
 	</div>
 	<div id="links">
 		Configure: 
-		<a href="Sharepoint"></a>
-		<a href="Touchpoint"></a>
+		<a href="sharepoint.php">Sharepoint</a>
+		<a href="touchpoint.php">Touchpoint</a>
 	</div>
 </div>
