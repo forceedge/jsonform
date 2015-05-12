@@ -2,12 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Sharepoint UV Generator</title>
+    <title>Touchpoint UV Generator</title>
     <link rel="stylesheet" style="text/css" href="deps/opt/bootstrap.css" />
   </head>
   <body>
+    <?php require 'menu.php'; ?>
     <div class="container">
-      <h1>Sharepoint UV Generator</h1>
+      <h1>Touchpoint UV Generator</h1>
       <form></form>
       <div id="res" class="alert"></div>
       <script type="text/javascript" src="deps/jquery.min.js"></script>
@@ -66,10 +67,10 @@
                   title: 'Twitter ID',
                   default: '{ user.twitterId }'
                 },
-                disable_address_bar_tracking: {
-                  type: 'boolean',
-                  title: "Disable address bar tracking"
-                }
+                // disable_address_bar_tracking: {
+                //   type: 'boolean',
+                //   title: "Disable address bar tracking"
+                // }
               },
             },
             "meta": {
@@ -162,6 +163,11 @@
 
           return eval('({' + reformattedMeta.slice(0, -1) + '})');
         }
+
+        jQuery('.controls > input').on('change', function(){
+          console.log(234);
+          jQuery('li.active .draggable.tab').val(jQuery('.controls > input').val());
+        });
 
       </script>
     </div>
