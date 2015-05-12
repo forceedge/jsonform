@@ -277,7 +277,7 @@
             });
 
             // re-organize the form
-            var content = jQuery('form div fieldset div fieldset').first().html();
+            var content = jQuery('form div fieldset div').first().html();
             jQuery('form div fieldset div').first().remove();
             jQuery('form fieldset').append(content);
 
