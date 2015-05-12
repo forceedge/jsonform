@@ -72,8 +72,10 @@ $('form#main').jsonForm({
     }
 });
 
+// Bit of a hack
 jQuery('.form-actions').remove();
 
+// arrayToProperObject
 function arrayToProperObject(arr) {
   var reformattedMeta = '';
 
@@ -236,7 +238,8 @@ $('form#touchpoint-generate-json').jsonForm({
           },
           {
             "key": "meta[].value",
-            "title": "Value"
+            "title": "Value",
+            "htmlClass": "wrapup"
           }
         ],
       }],
@@ -259,33 +262,33 @@ function generateOutput (errors, values) {
     return false;
 
   if(typeof values.meta !== 'undefined') {
-      values.meta = arrayToProperObject(values.meta);
+    values.meta = arrayToProperObject(values.meta);
 
-      for(var propertyName in values.meta) {
-        if(typeof values.meta[propertyName] !== 'undefined') {
-          values.meta[propertyName] = arrayToProperObject(values.meta[propertyName]);
-        }
-      };
-    }
-
-    if (errors) {
-      $('#res').html('<p>I beg your pardon?</p>');
-    }
-    else {
-      if (typeof values != 'string') {
-        // merge the two json objects, mainJSON contains the generic info
-        values = $.extend(true, {}, mainJSON, values);
-        // Get rid of the extra field
-        delete values._at['pointType'];
-
-        // Stringify the json object for output
-        json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
+    for(var propertyName in values.meta) {
+      if(typeof values.meta[propertyName] !== 'undefined') {
+        values.meta[propertyName] = arrayToProperObject(values.meta[propertyName]);
       }
+    };
+  }
 
-      // Display result in the res element
-      $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
+  if (errors) {
+    $('#res').html('<p>I beg your pardon?</p>');
+  }
+  else {
+    if (typeof values != 'string') {
+      // merge the two json objects, mainJSON contains the generic info
+      values = $.extend(true, {}, mainJSON, values);
+      // Get rid of the extra field
+      delete values._at['pointType'];
+
+      // Stringify the json object for output
+      json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
     }
-  };
+
+    // Display result in the res element
+    $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
+  }
+};
 
 // Switching between forms
 jQuery("select[name='_at.pointType']").on('change', function() {
