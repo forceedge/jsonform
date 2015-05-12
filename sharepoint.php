@@ -149,6 +149,8 @@
           // ],
         });
 
+        jQuery('#form-actions').remove();
+
         function arrayToProperObject(arr) {
           var reformattedMeta = '';
 
