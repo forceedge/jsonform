@@ -9,32 +9,32 @@ $('form#main').jsonForm({
       properties: {
         userId: {
           type: 'string',
-          title: 'Client User ID',
+          title: 'Customer User ID',
           default: '{ user.id }'            
         },
         username: {
           type: 'string',
-          title: 'Client\'s User Username',
+          title: 'Customer Username',
            default: '{ user.username }'
         },
         email: {
           type: "string",
-          title: 'Email Address',
+          title: 'Customer Email Address',
           default: '{ user.email }'
         },
         name: {
           type: 'string',
-          title: 'Client\'s User Name',
+          title: 'Customer Name',
            default: '{ user.name }'
         },
         facebookId: {
           type: 'string',
-          title: 'Facebook ID',
+          title: 'Customer Facebook ID',
           default: '{ user.facebookId }'
         },
         twitterId: {
           type: 'string',
-          title: 'Twitter ID',
+          title: 'Customer Twitter ID',
           default: '{ user.twitterId }'
         },
         pointType: {
