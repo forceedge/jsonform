@@ -66,7 +66,6 @@ $('form#main').jsonForm({
       else {
         if (typeof values != 'string') {
           mainJSON = values;
-          console.log(mainJSON);
         }
       }
     }
@@ -166,7 +165,7 @@ $('form#touchpoint-generate-json').jsonForm({
       type: "object",
       title: "Touchpoint Data",
       properties: {
-        TouchpointName: {
+        touchpointName: {
           type: 'string',
           title: 'Touchpoint Name',
           required: true
@@ -244,16 +243,18 @@ jQuery('.form-actions').remove();
 function arrayToProperObject(arr) {
   var reformattedMeta = '';
 
-  arr.forEach(function(obj) {
-    if(typeof obj.property !== 'undefined') {
-      reformattedMeta += obj.property.replace(/ /g, '_') + ': ';
-      if(typeof obj.value !== 'undefined') {
-        reformattedMeta += JSON.stringify(obj.value) + ',';
-      } else {
-        reformattedMeta += '"",';
+  if(arr.length > 0) {
+    arr.forEach(function(obj) {
+      if(typeof obj.property !== 'undefined') {
+        reformattedMeta += obj.property.replace(/ /g, '_') + ': ';
+        if(typeof obj.value !== 'undefined') {
+          reformattedMeta += JSON.stringify(obj.value) + ',';
+        } else {
+          reformattedMeta += '"",';
+        }
       }
-    }
-  });
+    });
+  }
 
   // creates a JSON object from string
   return eval('({' + reformattedMeta.slice(0, -1) + '})');
@@ -269,13 +270,11 @@ function generateOutput (errors, values) {
   if(! mainJSON)
     return false;
 
-  console.log(values);
-
   if(typeof values.meta !== "undefined") {
     values.meta = arrayToProperObject(values.meta);
 
     for(var propertyName in values.meta) {
-      if(propertyName == 'undefined') {
+      if(typeof propertyName == 'undefined') {
         values.meta = arrayToProperObject(values.meta);
       }
       else {
