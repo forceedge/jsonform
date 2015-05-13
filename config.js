@@ -25,7 +25,7 @@ $('form#main').jsonForm({
         name: {
           type: 'string',
           title: 'Customer Name',
-           default: '{ user.name }'
+          default: '{ user.name }'
         },
         facebookId: {
           type: 'string',
@@ -81,17 +81,17 @@ $('form#sharepoint-generate-json').jsonForm({
       properties: {
         sharepointName: {
           type: 'string',
-          title: 'Sharepoint Name',
+          title: 'Sharepoint Name *',
           required: true
         },
         shareChannel: {
           type: "string",
-          title: "Share Channel",
+          title: "Share Channel (Optional)",
           default: '{ shareChannel }'
         },
         shareTokenAlias: {
           type: "string",
-          title: "Share Token Alias"
+          title: "Share Token Alias (Optional)"
         }
       }
     },
@@ -171,7 +171,7 @@ $('form#touchpoint-generate-json').jsonForm({
       properties: {
         touchpointName: {
           type: 'string',
-          title: 'Touchpoint Name',
+          title: 'Touchpoint Name *',
           required: true
         }
       }
