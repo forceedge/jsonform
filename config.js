@@ -284,6 +284,7 @@ function generateOutput (errors, values) {
   }
 
   if (errors) {
+    console.log(errors);
     $('#res').html('<p>I beg your pardon?</p>');
   }
   else {

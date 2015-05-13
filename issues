@@ -1,0 +1,4 @@
+Wed 13 May 2015 11:36:27 BST [wahab qureshi]::[feature] Store JSON in db, and the user who created it, prompts the need for a user login?
+Wed 13 May 2015 11:41:20 BST [wahab qureshi]::[feature] Add bit more validation i.e min max chars
+Wed 13 May 2015 11:42:07 BST [wahab qureshi]::[feature] Send email from the json generator with the generated json
+Wed 13 May 2015 11:44:12 BST [wahab qureshi]::[enhancement] Bit more styling to it, need to decide what our color scheme is really
