@@ -1,0 +1,17 @@
+.wrapup .controls li fieldset > div {
+  width: 235px;
+  float: left;
+}
+form#main div.control-group {
+  width: 50%;
+  float: left;
+}
+legend + .control-group {
+  margin-top: 0 !important;
+}
+pre {
+  margin: 0 !important;
+}
+div#res.alert {
+  padding: 0 !important;
+}
