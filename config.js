@@ -89,7 +89,7 @@ $('form#sharepoint-generate-json').jsonForm({
           title: "Share Channel",
           default: '{ shareChannel }'
         },
-        shareToken Alias: {
+        shareTokenAlias: {
           type: "string",
           title: "Share Token Alias"
         }
