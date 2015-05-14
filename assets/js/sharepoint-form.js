@@ -29,11 +29,11 @@ $('form#sharepoint-generate-json').jsonForm({
         title: "meta",
         properties: {
           "property": {
-            type: "string"
+            type: "string",
+            title: "property"
           },
           "value": {
             type: "array",
-            title: "Value {{idx}}",
             items: {
               type: "object",
               properties: {
@@ -67,12 +67,12 @@ $('form#sharepoint-generate-json').jsonForm({
         "items": [
           {
             "key": "meta[].property",
-            "title": "Property",
+            "title": "Category",
             "valueInLegend": true
           },
           {
             "key": "meta[].value",
-            "title": "Value",
+            "title": "Fields",
             "htmlClass": "wrapup"
           }
         ],

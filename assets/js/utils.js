@@ -8,8 +8,6 @@ jQuery('form.generated-json').hide();
 function generateOutput (errors, values) {
   jQuery('form#main').submit();
 
-  console.log(values);
-
   if(! mainJSON)
     return false;
 
@@ -20,11 +18,17 @@ function generateOutput (errors, values) {
     for(var propertyName in values.meta) {
       if(typeof propertyName == 'undefined') {
         values = $.extend(true, {}, values, arrayToProperObject(values.meta));
-      }
-      else {
-        values[propertyName.replace(/ /g, '_')] = arrayToProperObject(values.meta[propertyName]);
+      } else {
+        // Write to clean property as we are going to delete the meta later
+        if(typeof values.meta[propertyName][0] == 'undefined') {
+          values[propertyName.replace(/ /g, '_')] = $.extend(true, {}, values.meta[propertyName], arrayToProperObject(values.meta[propertyName]));
+        } else {
+          values[propertyName.replace(/ /g, '_')] = arrayToProperObject(values.meta[propertyName]);
+        }
       }
     };
+
+    console.log(values);
 
     delete values.meta;
   }
@@ -53,25 +57,31 @@ function generateOutput (errors, values) {
 function arrayToProperObject(arr) {
   var reformattedMeta = '';
 
-  if(arr.length > 0) {
+  if(arr.length > 0 && typeof arr == 'object') {
     arr.forEach(function(obj) {
       if(typeof obj.property !== 'undefined') {
-        reformattedMeta += obj.property.replace(/ /g, '_') + ': ';
+        reformattedMeta += '"' + obj.property.replace(/ /g, '_') + '": ';
+
         if(typeof obj.value !== 'undefined') {
-          // if(typeof obj.value == 'object') {
-          //   reformattedMeta += arrayToProperObject(obj.value);
-          // } else {
-            reformattedMeta += JSON.stringify(obj.value) + ',';  
-          // }
+          reformattedMeta += JSON.stringify(obj.value) + ',';
         } else {
           reformattedMeta += '"",';
         }
+      } else {
+        reformattedMeta += JSON.stringify(arrayToProperObject(obj.value)).replace('{','').replace('}','') + ',';
       }
     });
+
+    // creates a JSON object from string
+    var evaluated = JSON.parse('{' + reformattedMeta.slice(0, -1) + '}');
+  } else {
+    // creates a JSON object from string
+    var evaluated = arr;
   }
 
-  // creates a JSON object from string
-  return eval('({' + reformattedMeta.slice(0, -1) + '})');
+  
+
+  return evaluated;
 }
 
 // Switching between forms
