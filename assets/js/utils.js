@@ -21,15 +21,21 @@ function generateOutput (errors, values) {
       } else {
         // Write to clean property as we are going to delete the meta later
         if(typeof values.meta[propertyName][0] == 'undefined') {
-          values[propertyName.replace(/ /g, '_')] = $.extend(true, {}, values.meta[propertyName], arrayToProperObject(values.meta[propertyName]));
+          // Extend the original
+          values[propertyName.replace(/ /g, '_')] = $.extend(
+            true, 
+            {}, 
+            values.meta[propertyName], 
+            arrayToProperObject(values.meta[propertyName])
+          );          
         } else {
+          // Discard the original
           values[propertyName.replace(/ /g, '_')] = arrayToProperObject(values.meta[propertyName]);
         }
       }
     };
 
-    console.log(values);
-
+    // Get rid of the meta object created by JSONForm
     delete values.meta;
   }
 
@@ -55,31 +61,41 @@ function generateOutput (errors, values) {
 
 // arrayToProperObject
 function arrayToProperObject(arr) {
-  var reformattedMeta = '';
+  var reformattedMeta = '', evaluated, finalJSON;
 
   if(arr.length > 0 && typeof arr == 'object') {
+    // Go through each object
     arr.forEach(function(obj) {
       if(typeof obj.property !== 'undefined') {
+        // Set property without spaces
         reformattedMeta += '"' + obj.property.replace(/ /g, '_') + '": ';
 
         if(typeof obj.value !== 'undefined') {
+          // Value specified
           reformattedMeta += JSON.stringify(obj.value) + ',';
         } else {
+          // No value specified
           reformattedMeta += '"",';
         }
       } else {
+        // Deal with _at level properties
         reformattedMeta += JSON.stringify(arrayToProperObject(obj.value)).replace('{','').replace('}','') + ',';
       }
     });
 
-    // creates a JSON object from string
-    var evaluated = JSON.parse('{' + reformattedMeta.slice(0, -1) + '}');
+    finalJSON = '{' + reformattedMeta.slice(0, -1) + '}';
+
+    try {
+      // creates a JSON object from string
+      evaluated = JSON.parse(finalJSON.replace('"', '\"'));
+    } catch (e) {
+      console.warn('Invalid json: ' + finalJSON);
+      evaluated = '';
+    }
   } else {
     // creates a JSON object from string
-    var evaluated = arr;
-  }
-
-  
+    evaluated = arr;
+  } 
 
   return evaluated;
 }
