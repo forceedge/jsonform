@@ -4,7 +4,7 @@ jQuery('.form-actions').remove();
 // Hide the genrated forms
 jQuery('form.generated-json').hide();
 
-var at_json_generator = {
+var atJSONGenerator = {
   // Generates the JSON for both of the form submissions
   generateOutput: function (errors, values) {
     jQuery('form#main').submit();
@@ -14,27 +14,13 @@ var at_json_generator = {
 
     if(typeof values.meta !== "undefined") {
       // Prepare meta values to be extracted and reformatted
-      values.meta = $.extend(true, {}, values, at_json_generator.arrayToProperObject(values.meta));
-
-      for(var propertyName in values.meta) {
-        if(typeof propertyName == 'undefined') {
-          values = $.extend(true, {}, values, at_json_generator.arrayToProperObject(values.meta));
-        } else {
-          // Write to clean property as we are going to delete the meta later
-          if(typeof values.meta[propertyName][0] == 'undefined') {
-            // Extend the original
-            values[propertyName.replace(/ /g, '_')] = $.extend(
-              true, 
-              {}, 
-              values.meta[propertyName], 
-              at_json_generator.arrayToProperObject(values.meta[propertyName])
-            );          
-          } else {
-            // Discard the original
-            values[propertyName.replace(/ /g, '_')] = at_json_generator.arrayToProperObject(values.meta[propertyName]);
-          }
-        }
-      };
+      values.meta = $.extend(
+        true, 
+        {}, 
+        values,
+        atJSONGenerator.arrayToProperObject(values.meta)
+      );
+      values = atJSONGenerator.filterProperties(values);
 
       // Get rid of the meta object created by JSONForm
       delete values.meta;
@@ -45,7 +31,7 @@ var at_json_generator = {
       $('#res').html('<p>I beg your pardon?</p>');
     }
     else {
-      json = at_json_generator.generateJSON(values);
+      json = atJSONGenerator.generateJSON(values);
       // Display result in the res element
       $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
     } 
@@ -56,14 +42,35 @@ var at_json_generator = {
       values = $.extend(true, {}, mainJSON, values);
       // Get rid of the extra field
       delete values._at['pointType'];
-
       // Stringify the json object for output
       json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
 
       return json;
     }
   },
+  filterProperties: function(values) {
+    for(var propertyName in values.meta) {
+      if(typeof propertyName == 'undefined') {
+        values = $.extend(true, {}, values, atJSONGenerator.arrayToProperObject(values.meta));
+      } else {
+        // Write to clean property as we are going to delete the meta later
+        if(typeof values.meta[propertyName][0] == 'undefined') {
+          // Extend the original
+          values[atJSONGenerator.filterJSONProperty(propertyName)] = $.extend(
+            true, 
+            {}, 
+            values.meta[propertyName], 
+            atJSONGenerator.arrayToProperObject(values.meta[propertyName])
+          );          
+        } else {
+          // Discard the original
+          values[atJSONGenerator.filterJSONProperty(propertyName)] = atJSONGenerator.arrayToProperObject(values.meta[propertyName]);
+        }
+      }
+    };
 
+    return values;
+  },
   // arrayToProperObject
   arrayToProperObject: function (arr) {
     var reformattedMeta = '', evaluated, finalJSON;
@@ -72,29 +79,33 @@ var at_json_generator = {
       // Go through each object
       arr.forEach(function(obj) {
         if(typeof obj.property !== 'undefined') {
+          console.log('defined');
           // Set property without spaces
-          reformattedMeta += '"' + at_json_generator.filterJSONProperty(obj.property) + '": ';
+          reformattedMeta += '"' + atJSONGenerator.filterJSONProperty(obj.property) + '": ';
 
           if(typeof obj.value !== 'undefined') {
             // Value specified
-            reformattedMeta += at_json_generator.filterJSONValue(obj.value) + ',';
+            reformattedMeta += atJSONGenerator.filterJSONValue(obj.value) + ',';
           } else {
             // No value specified
             reformattedMeta += '"",';
           }
         } else {
+          console.log('undefined');
           // Deal with _at level properties
-          reformattedMeta += at_json_generator.filterJSONValue(arrayToProperObject(obj.value)).replace('{','').replace('}','') + ',';
+          reformattedMeta += atJSONGenerator.filterJSONValue(
+            atJSONGenerator.arrayToProperObject(obj.value)
+          ).replace('{','').replace('}','') + ',';
         }
       });
 
       finalJSON = '{' + reformattedMeta.slice(0, -1) + '}';
 
       try {
-        console.log(finalJSON);
         // creates a JSON object from string
         evaluated = JSON.parse(finalJSON);
       } catch (e) {
+        console.warn(e);
         console.warn('Invalid json: ' + finalJSON);
         evaluated = '';
       }
@@ -111,7 +122,7 @@ var at_json_generator = {
   filterJSONValue: function (obj) {
     return JSON.stringify(obj).replace('"', '\"');
   },
-  // Switching between forms
+  // Switching between touch/share point forms
   attachOnChangeEvents: function() {
     jQuery("select[name='_at.pointType']").on('change', function() {
       // Reset stuff
@@ -127,4 +138,4 @@ var at_json_generator = {
   }
 }
 
-at_json_generator.attachOnChangeEvents();
+atJSONGenerator.attachOnChangeEvents();

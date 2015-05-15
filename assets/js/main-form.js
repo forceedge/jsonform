@@ -50,11 +50,11 @@ $('form#main').jsonForm({
   },
   onSubmit: function (errors, values) {
     if(typeof values.meta !== 'undefined') {
-        values.meta = arrayToProperObject(values.meta);
+        values.meta = atJSONGenerator.arrayToProperObject(values.meta);
 
         for(var propertyName in values.meta) {
           if(typeof values.meta[propertyName] !== 'undefined') {
-            values.meta[propertyName] = arrayToProperObject(values.meta[propertyName]);
+            values.meta[propertyName] = atJSONGenerator.arrayToProperObject(values.meta[propertyName]);
           }
         };
       }
