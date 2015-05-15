@@ -84,6 +84,6 @@ $('form#sharepoint-generate-json').jsonForm({
     }
   ],
   onSubmit: function(errors, values) {
-    generateOutput(errors, values);
+    at_json_generator.generateOutput(errors, values);
   }
 });
