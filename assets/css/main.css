@@ -1,7 +1,8 @@
 .wrapup .controls li fieldset > div {
-  width: 235px;
+  width: 365px;
   float: left;
 }
+
 form#main div.control-group {
   width: 50%;
   float: left;
@@ -14,4 +15,72 @@ pre {
 }
 div#res.alert {
   padding: 0 !important;
+}
+
+ul.nav-tabs {
+	margin-right: -1px !important;
+	font-weight: bold;
+	width: 150px;
+}
+
+ul.nav-tabs + div {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 10px;
+}
+
+.categoryInput {
+	float: left;
+	width: 100%;
+}
+
+.categoryInput label {
+	float: left;
+	font-weight: bold;
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 5px;
+	margin-bottom: 20px;
+}
+
+.categoryInput input {
+	float: left;
+	width: 98%;
+}
+
+.wrapup {
+	float: left;
+	width: 100%;
+}
+
+.wrapup > label {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 20px;
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+
+input, textarea, select, .uneditable-input {
+	width: 360px;
+}
+
+label {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+ul input {
+	width: 92%;
+}
+
+form#main input {
+	width: 95%;
+}
+
+form#main .controls {
+	margin-right: 10px;
+}
+
+fieldset.jsonform-error-_at  input{
+	width: 98%;
 }

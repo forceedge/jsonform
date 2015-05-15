@@ -57,7 +57,7 @@ $('form#sharepoint-generate-json').jsonForm({
   },
   "form": [
     {
-      "key": "_at"
+      "key": "_at",
     },
     {
       "type": "tabarray",
@@ -68,7 +68,8 @@ $('form#sharepoint-generate-json').jsonForm({
           {
             "key": "meta[].property",
             "title": "Category",
-            "valueInLegend": true
+            "valueInLegend": true,
+            "htmlClass": "categoryInput"
           },
           {
             "key": "meta[].value",

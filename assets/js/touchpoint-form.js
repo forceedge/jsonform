@@ -56,12 +56,13 @@ $('form#touchpoint-generate-json').jsonForm({
         "items": [
           {
             "key": "meta[].property",
-            "title": "Property",
-            "valueInLegend": true
+            "title": "Category",
+            "valueInLegend": true,
+            "htmlClass": "categoryInput"
           },
           {
             "key": "meta[].value",
-            "title": "Value",
+            "title": "Fields",
             "htmlClass": "wrapup"
           }
         ],
