@@ -4,7 +4,7 @@ $('form#main').jsonForm({
   schema: {          
     "_at": {
       type: "object",
-      title: "Advocate_Things",
+      title: "Advocate Things",
       properties: {
         userId: {
           type: 'string',

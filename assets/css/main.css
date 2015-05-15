@@ -1,3 +1,7 @@
+body {
+	color: #333333;
+}
+
 .wrapup .controls li fieldset > div {
   width: 365px;
   float: left;
@@ -83,4 +87,8 @@ form#main .controls {
 
 fieldset.jsonform-error-_at  input{
 	width: 98%;
+}
+
+h1 {
+	margin: 30px 0;
 }
