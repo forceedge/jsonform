@@ -73,7 +73,7 @@ $('form#sharepoint-generate-json').jsonForm({
           },
           {
             "key": "meta[].value",
-            "title": "Fields",
+            "title": "Properties",
             "htmlClass": "wrapup"
           }
         ],
