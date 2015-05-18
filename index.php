@@ -46,6 +46,7 @@
       <script type="text/javascript" src="assets/js/touchpoint-form.js"></script>
       <script type="text/javascript" src="assets/js/mandrill-form.js"></script>
       <script type="text/javascript" src="assets/js/tangocard-form.js"></script>
+      <script type="text/javascript" src="assets/js/advocacy-function-form.js"></script>
 
       <script type="text/javascript" src="assets/js/utils.js"></script>
 
