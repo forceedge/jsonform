@@ -74,6 +74,19 @@ $('form#touchpoint-generate-json').jsonForm({
     }
   ],
   onSubmit: function(errors, values) {
-    atJSONGenerator.generateOutput(errors, values);
+    var result;
+
+    jQuery('form#main').submit();
+
+    if(! mainJSON)
+      return false;
+
+    // Get the JSON back
+    if(result = atJSONGenerator.generateOutput(errors, values)) {
+      // Stringify the result
+      result = atJSONGenerator.generateJSONString(result);
+      // Display the result
+      atJSONGenerator.showResult(result, 'window.advocate_things_data = ');
+    }
   }
 });

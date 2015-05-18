@@ -35,15 +35,6 @@ $('form#main').jsonForm({
           type: 'string',
           title: 'Customer Twitter ID',
           default: '{ user.twitterId }'
-        },
-        pointType: {
-          type: 'string',
-          title: 'Point Type',
-          enum: [
-            'Please select',
-            'sharepoint',
-            'touchpoint'
-          ]
         }
       }
     }

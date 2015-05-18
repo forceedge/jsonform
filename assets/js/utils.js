@@ -6,12 +6,8 @@ jQuery('form.generated-json').hide();
 
 var atJSONGenerator = {
   // Generates the JSON for both of the form submissions
+  // Returns JSON object
   generateOutput: function (errors, values) {
-    jQuery('form#main').submit();
-
-    if(! mainJSON)
-      return false;
-
     if(typeof values.meta !== "undefined") {
       // Prepare meta values to be extracted and reformatted
       values.meta = $.extend(
@@ -28,20 +24,21 @@ var atJSONGenerator = {
 
     if (errors) {
       console.warn(errors);
-      $('#res').html('<p>I beg your pardon?</p>');
+      return false;
     }
     else {
-      json = atJSONGenerator.generateJSON(values);
-      // Display result in the res element
-      $('#res').html('<pre>window.advocate_things_data = '+ json +'</pre>');
+      return values;
     } 
   },
-  generateJSON: function(values) {
+  // Returns JSON string
+  generateJSONString: function(values) {
     if (typeof values != 'string') {
+      // If mainJSON is undefined
+      if(typeof mainJSON == 'undefined') {
+        mainJSON = {};
+      }
       // merge the two json objects, mainJSON contains the generic info
       values = $.extend(true, {}, mainJSON, values);
-      // Get rid of the extra field
-      delete values._at['pointType'];
       // Stringify the json object for output
       json = JSON.stringify(values, undefined, 2).replace(/[\r\n]/g, '<br />');
 
@@ -124,17 +121,36 @@ var atJSONGenerator = {
   },
   // Switching between touch/share point forms
   attachOnChangeEvents: function() {
-    jQuery("select[name='_at.pointType']").on('change', function() {
-      // Reset stuff
-      jQuery('form.generated-json').hide();
-      jQuery('#res').empty();
+    jQuery('select#formType').on('change', function() {
+      jQuery('form').hide();
+      jQuery('#res').html('');
+      var val = jQuery(this).val();
+      
+      if(val != '') {
+        // Main form is shared between both sub forms
+        if(val == 'sharepoint-generate-json' || val == 'touchpoint-generate-json') {
+          jQuery('form#main').show();
+        }
 
-      if($(this).val() == 'sharepoint') {
-        jQuery('form#sharepoint-generate-json').show();
-      } else if($(this).val() === 'touchpoint') {    
-        jQuery('form#touchpoint-generate-json').show();
+        jQuery('form#' + val).show();
       }
     });
+  },
+  showResult: function(result, prepend, append) {
+    if(typeof prepend == 'undefined') {
+      prepend = '';
+    }
+
+    if(typeof append == 'undefined') {
+      append = '';
+    }
+
+    if(! result) {
+      $('#res').html('<p>I beg your pardon?</p>');
+    } else {
+      // Display result in the res element
+        $('#res').html('<pre>' + prepend + result + append + '</pre>');
+    }
   }
 }
 
