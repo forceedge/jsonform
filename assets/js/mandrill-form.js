@@ -75,6 +75,7 @@ $('form#mandrill-generate-json').jsonForm({
         template_content: {
           type: 'tabarray',
           title: 'Template Content',
+          legend: "{{ value }}",
           items: {
             type: "object",
             properties: {

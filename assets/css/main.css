@@ -33,6 +33,25 @@ ul.nav-tabs + div {
 	padding: 10px;
 }
 
+.tab-content fieldset {
+	float: left;
+	width: 100%;	
+}
+
+.tab-content fieldset label {
+	float: left;
+	font-weight: bold;
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 5px;
+	margin-bottom: 20px;
+}
+
+.tab-content fieldset input {
+	float: left;
+	width: 98%;
+}
+
 .categoryInput {
 	float: left;
 	width: 100%;
