@@ -73,8 +73,8 @@ $('form#mandrill-generate-json').jsonForm({
         },
         // Convert to array
         template_content: {
-          type: 'array',
-          title: 'Campaign',
+          type: 'tabarray',
+          title: 'Template Content',
           items: {
             type: "object",
             properties: {
@@ -103,7 +103,7 @@ $('form#mandrill-generate-json').jsonForm({
               title: 'From Name'
             },
             to: {
-              type: 'array',
+              type: 'tabarray',
               title: 'To',
               items: {
                 type: 'object',

@@ -32,7 +32,7 @@
       </form>
       <form id="sharepoint-generate-json" class="generated-json">
       </form>
-      <form id="mandrill-generate-json" class="generated-json small-inputs">
+      <form id="mandrill-generate-json" class="generated-json">
       </form>
       <form id="tangocard-generate-json" class="generated-json small-inputs">
       </form>
