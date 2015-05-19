@@ -45,6 +45,28 @@ var atJSONGenerator = {
       return json;
     }
   },
+  generateInvalidJSONStringForSQL: function(values) {
+    var sql = '{';
+    var field = '';
+
+    // Touchpoint sum, field is an extra param
+    if(typeof values.field !== 'undefined') {
+      field = 'client_metadata.' + values.field + ', ';
+    }
+
+    sql += values.touchpoint_name + ', ' +
+      field +
+      values.threshold + ', ' +
+      values.advocate + ', ' + 
+      values.friend + ', ' + 
+      values.repeat + ', ' +
+      values.max;
+
+    return sql + '}';
+  },
+  extendJSON: function(json1, json2) {
+    return $.extend(true, {}, json1, json2);
+  },
   filterProperties: function(values) {
     for(var propertyName in values.meta) {
       if(typeof propertyName == 'undefined') {

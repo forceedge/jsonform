@@ -21,6 +21,12 @@ div#res.alert {
   padding: 0 !important;
 }
 
+div#res {
+	float: left;
+	margin-top: 10px;
+	width: 100%;
+}
+
 ul.nav-tabs {
 	margin-right: -1px !important;
 	font-weight: bold;
@@ -114,4 +120,9 @@ fieldset.jsonform-error-_at  input{
 
 h1 {
 	margin: 30px 0;
+}
+
+.subform {
+	width: 100%;
+	float: left;
 }

@@ -38,6 +38,12 @@
       </form>
       <form id="advocacy-function-generate-json" class="generated-json small-inputs">
       </form>
+      <form id="touchpoint_sum" class="generated-json small-inputs subform">
+        
+      </form>
+      <form id="touchpoint_count" class="generated-json small-inputs subform">
+        
+      </form>
       <div id="res" class="alert"></div>
 
       <!-- JSONForm generator -->
