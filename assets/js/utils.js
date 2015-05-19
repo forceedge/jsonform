@@ -183,7 +183,9 @@ var atJSONGenerator = {
       client.on( "aftercopy", function( event ) {
         var original = $('button#'+event.target.id).html();
         $('button#'+event.target.id).html("Copied!");
-        setTimeout(function(){ $('button#'+event.target.id).html(original); }, 2000);
+        $('#resultModal').on('hidden.bs.modal', function() {
+          $('button#'+event.target.id).html(original);
+        });
       } );
     } );
   }
