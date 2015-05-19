@@ -8,8 +8,7 @@ $('form#sharepoint-generate-json').jsonForm({
       properties: {
         sharepointName: {
           type: 'string',
-          title: 'Sharepoint Name *',
-          required: true
+          title: 'Sharepoint Name'
         },
         shareChannel: {
           type: "string",

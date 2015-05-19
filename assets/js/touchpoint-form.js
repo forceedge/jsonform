@@ -8,8 +8,7 @@ $('form#touchpoint-generate-json').jsonForm({
       properties: {
         touchpointName: {
           type: 'string',
-          title: 'Touchpoint Name *',
-          required: true
+          title: 'Touchpoint Name'
         }
       }
     },
