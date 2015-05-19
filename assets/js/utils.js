@@ -46,7 +46,7 @@ var atJSONGenerator = {
     }
   },
   generateInvalidJSONStringForSQL: function(values) {
-    var sql = '{';
+    var sql = '[';
     var field = '';
 
     // Touchpoint sum, field is an extra param
@@ -62,7 +62,7 @@ var atJSONGenerator = {
       values.repeat + ', ' +
       values.max;
 
-    return sql + '}';
+    return sql + ']';
   },
   extendJSON: function(json1, json2) {
     return $.extend(true, {}, json1, json2);

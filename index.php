@@ -18,12 +18,20 @@
       
       <label for="formType">Generate content for: </label>
       <select id="formType">
-        <option value="">Please select</option>
-        <option value="touchpoint-generate-json">Touchpoint</option>
-        <option value="sharepoint-generate-json">Sharepoint</option>
-        <option value="mandrill-generate-json">Mandrill</option>
-        <option value="tangocard-generate-json">Tango Card</option>
-        <option value="advocacy-function-generate-json">Advocacy Function</option>
+        <option value="">Please Select</option>
+        <optgroup label="Advocate Things Object">
+          <option value="touchpoint-generate-json">Touchpoint</option>
+          <option value="sharepoint-generate-json">Sharepoint</option>  
+        </optgroup>
+
+        <optgroup label="Action Templates">
+          <option value="mandrill-generate-json">Mandrill</option>
+          <option value="tangocard-generate-json">Tango Card</option>  
+        </optgroup>        
+
+        <optgroup label="Function Configuration">
+          <option value="advocacy-function-generate-json">Advocacy Function</option>
+        </optgroup>
       </select>
 
       <form id="main" class="generated-json small-inputs">

@@ -57,7 +57,7 @@ $('form#mandrill-generate-json').jsonForm({
     },
     "body": {
       type: "object",
-      title: "Body",
+      title: "Configuration",
       properties: {
         key: {
           type: 'string',
@@ -104,8 +104,9 @@ $('form#mandrill-generate-json').jsonForm({
               title: 'From Name'
             },
             to: {
-              type: 'tabarray',
+              type: 'array',
               title: 'To',
+              htmlClass: "crazy",
               items: {
                 type: 'object',
                 properties: {
@@ -146,7 +147,8 @@ $('form#mandrill-generate-json').jsonForm({
       "key": "headers"
     },
     {
-      "key": "body"
+      "key": "body",
+      "htmlClass": "mandrill-body"
     },
     {
       "type": "submit",
@@ -165,3 +167,6 @@ $('form#mandrill-generate-json').jsonForm({
     }
   }
 });
+
+// Remove array buttons
+jQuery('.mandrill-body ._jsonform-array-buttons').remove();

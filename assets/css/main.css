@@ -131,3 +131,7 @@ span.hint {
 	color: gray;
 	font-size: 10px;
 }
+
+form input[type='checkbox'] {
+	width: 10%;
+}

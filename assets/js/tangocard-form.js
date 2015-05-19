@@ -92,10 +92,8 @@ $('form#tangocard-generate-json').jsonForm({
       		default: ' '
       	},
       	send_reward: {
-      		type: 'string',
-      		title: 'Send Reward',
-      		required: true,
-      		default: 'false'
+      		type: 'boolean',
+      		title: 'Send Reward'
       	}
       }
     }

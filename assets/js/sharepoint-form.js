@@ -60,6 +60,7 @@ $('form#sharepoint-generate-json').jsonForm({
     },
     {
       "type": "tabarray",
+      "title": 'Meta Data',
       "items": [{
         "type": "section",
         "legend": "{{ value }}",
