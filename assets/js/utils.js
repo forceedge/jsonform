@@ -181,7 +181,7 @@ var atJSONGenerator = {
 
     client.on( "ready", function( readyEvent ) {
       client.on( "aftercopy", function( event ) {
-        event.target.value = "Copied";
+        $('button#'+event.target.id).html("Copied!");
       } );
     } );
   }

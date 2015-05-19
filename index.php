@@ -68,7 +68,7 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <!-- copy button -->
-              <button type="button" id="copy-button" class="btn btn-primary" data-clipboard-text="">Copy to Clipboard</button>
+              <button type="button" id="copy-button" class="btn btn-primary" data-clipboard-text="">Copy</button>
               <script src="assets/zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script>
             </div>
           </div><!-- /.modal-content -->
