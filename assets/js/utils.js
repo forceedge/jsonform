@@ -46,23 +46,23 @@ var atJSONGenerator = {
     }
   },
   generateInvalidJSONStringForSQL: function(values) {
-    var sql = '[';
+    var sql = '["';
     var field = '';
 
     // Touchpoint sum, field is an extra param
     if(typeof values.field !== 'undefined') {
-      field = 'client_metadata.' + values.field + ', ';
+      field = '"client_metadata.' + values.field + '", "';
     }
 
-    sql += values.touchpoint_name + ', ' +
+    sql += values.touchpoint_name + '", "' +
       field +
-      values.threshold + ', ' +
-      values.advocate + ', ' + 
-      values.friend + ', ' + 
-      values.repeat + ', ' +
+      values.threshold + '", "' +
+      values.advocate + '", "' + 
+      values.friend + '", "' + 
+      values.repeat + '", "' +
       values.max;
 
-    return sql + ']';
+    return sql + '"]';
   },
   extendJSON: function(json1, json2) {
     return $.extend(true, {}, json1, json2);
