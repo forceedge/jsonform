@@ -8,6 +8,7 @@
 
     <!-- DEPS -->
     <script type="text/javascript" src="vendor/deps/jquery.min.js"></script>
+    <script type="text/javascript" src="vendor/deps/opt/bootstrap.min.js"></script>
     <script type="text/javascript" src="vendor/deps/underscore.js"></script>
     <script type="text/javascript" src="vendor/deps/opt/jsv.js"></script>
     <script type="text/javascript" src="vendor/lib/jsonform.js"></script>
@@ -52,7 +53,27 @@
       <form id="touchpoint_count" class="generated-json small-inputs subform">
         
       </form>
-      <div id="res" class="alert"></div>
+
+      <!-- result modal -->
+      <div class="modal fade" id="resultModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Generated Content</h4>
+            </div>
+            <div class="modal-body" id="res">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <!-- copy button -->
+              <button type="button" id="copy-button" class="btn btn-primary" data-clipboard-text="">Copy to Clipboard</button>
+              <script src="assets/zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
 
       <!-- JSONForm generator -->
       <script type="text/javascript" src="assets/js/main-form.js"></script>
@@ -63,7 +84,6 @@
       <script type="text/javascript" src="assets/js/advocacy-function-form.js"></script>
 
       <script type="text/javascript" src="assets/js/utils.js"></script>
-
     </div>
   </body>
 </html>

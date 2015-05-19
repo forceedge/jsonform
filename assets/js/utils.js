@@ -172,8 +172,20 @@ var atJSONGenerator = {
     } else {
       // Display result in the res element
         $('#res').html('<pre>' + prepend + result + append + '</pre>');
+        $('#copy-button').attr('data-clipboard-text', prepend + result.replace(/<br \/>/g, '\r\n') + append);
+        $('#resultModal').modal('show');
     }
+  },
+  zeroClipboardCopy: function() {
+    var client = new ZeroClipboard( document.getElementById("copy-button") );
+
+    client.on( "ready", function( readyEvent ) {
+      client.on( "aftercopy", function( event ) {
+        event.target.value = "Copied";
+      } );
+    } );
   }
 }
 
 atJSONGenerator.attachOnChangeEvents();
+atJSONGenerator.zeroClipboardCopy();
