@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8" />
     <title>Advocate Things Generator</title>
     <link rel="stylesheet" style="text/css" href="vendor/deps/opt/bootstrap.css" />
     <link rel="stylesheet" style="text/css" href="assets/css/main.css" />
