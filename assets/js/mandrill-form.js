@@ -5,11 +5,11 @@
 // name      | costa_starbucks_email_voucher_25gbp
 // method    | POST
 // url       | https://mandrillapp.com/api/1.0/messages/send-template.json
-// headers   | 
+// headers   |
 // {
 //   "Content-Type": "application/json; charset=utf-8"
 // }
-// body      | 
+// body      |
 // {
 //     "key": "WAY-2sqOVGH7devg34EiCQ",
 //     "template_name": "ZaidTestTemplate",
@@ -105,7 +105,7 @@ $('form#mandrill-generate-json').jsonForm({
             },
             to: {
               type: 'array',
-              title: 'To',
+              title: 'to',
               htmlClass: "crazy",
               items: {
                 type: 'object',
@@ -123,7 +123,7 @@ $('form#mandrill-generate-json').jsonForm({
                   type: {
                     type: 'string',
                     title: 'Type',
-                    default: 'To'
+                    default: 'to'
                   }
                 }
               }
