@@ -62,7 +62,7 @@ $('form#mandrill-generate-json').jsonForm({
         key: {
           type: 'string',
           title: 'Key',
-          required: true,
+          readonly: true,
           default: 'WAY-2sqOVGH7devg34EiCQ'
         },
         template_name: {
@@ -156,19 +156,16 @@ $('form#mandrill-generate-json').jsonForm({
     }
   ],
   onSubmit: function(errors, values) {
-    var result;
+    var result, headers, body;
 
     // Get the JSON back
     if(result = atJSONGenerator.generateOutput(errors, values)) {
-
-      console.log(result);
       // Stringify the result
-      result = atJSONGenerator.generateJSONString(result);
-
-      console.log(result);
+      headers = 'Headers: <br />' + atJSONGenerator.generateJSONString(result.headers);
+      body = '<br /><br />Body: <br/>' + atJSONGenerator.generateJSONString(result.body);
 
       // Display the result
-      atJSONGenerator.showResult(result);
+      atJSONGenerator.showResult(headers + body);
     }
   }
 });

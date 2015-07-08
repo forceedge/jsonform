@@ -39,7 +39,8 @@ $('form#tangocard-generate-json').jsonForm({
         Authorization: {
           type: "string",
           title: "API Key *",
-          required: true
+          readonly: true,
+          default: 'RGlnaXRhbEFuaW1hbFRlc3Q6NkxXRGUzbDRnUTRIUGNGR3FmaGNDeVVpQ2o4MjRXSWZLUmo0RjZJTndpR2JpSVJiTlBlaklUSTBobw=='
         }
       }
     },
@@ -111,16 +112,17 @@ $('form#tangocard-generate-json').jsonForm({
     }
   ],
   onSubmit: function(errors, values) {
-    var result;
+    var result, headers, body;
 
     // Get the JSON back
     if(result = atJSONGenerator.generateOutput(errors, values)) {
     	// Amend returned data
     	result.headers.Authorization = 'Basic ' + result.headers.Authorization
-    	// Stringify the result
-    	result = atJSONGenerator.generateJSONString(result);
+      headers = 'Headers: <br />' + atJSONGenerator.generateJSONString(result.headers);
+      body = '<br /><br />Body: <br/>' + atJSONGenerator.generateJSONString(result.body);
+      
     	// Display the result
-    	atJSONGenerator.showResult(result);
+    	atJSONGenerator.showResult(headers + body);
     }
   }
 });
