@@ -163,7 +163,7 @@ $('form#mandrill-generate-json').jsonForm({
       // Stringify the result
       result = atJSONGenerator.generateJSONString(result);
 
-      console.log(result);
+      console.log(result); 
 
       // Display the result
       atJSONGenerator.showResult(result);
