@@ -162,6 +162,9 @@ $('form#mandrill-generate-json').jsonForm({
     if(result = atJSONGenerator.generateOutput(errors, values)) {
       // Stringify the result
       result = atJSONGenerator.generateJSONString(result);
+
+      console.log(result);
+
       // Display the result
       atJSONGenerator.showResult(result);
     }
