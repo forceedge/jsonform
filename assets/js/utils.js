@@ -49,11 +49,6 @@ var atJSONGenerator = {
     var sql = '["';
     var field = '';
 
-    // Touchpoint sum, field is an extra param
-    if(typeof values.field !== 'undefined') {
-      field = 'client_metadata.' + values.field + '", "';
-    }
-
     sql += values.touchpoint_name + '", "' +
       field +
       values.threshold + '", "' +
